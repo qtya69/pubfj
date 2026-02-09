@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Support\Facades\Log;
 use Exception;
+use App\Events\MissModelEvent;
 
 class InvalidModelException extends Exception {
     
@@ -41,6 +42,8 @@ class InvalidModelException extends Exception {
         }
 
         Log::channel( "invalid_model")->warning( "Adatbázis hiba", $logData );
+
+        event( new MissModelEvent( $logData ) );
     }
 
     private function buildMessage( Request $request ) {
