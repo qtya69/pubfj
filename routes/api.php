@@ -10,6 +10,7 @@ use App\Http\Controllers\api\TypeController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\AdminController;
 use App\Http\Controllers\api\ProfileController;
+use App\Models\User;
 
 //User
 Route::post( "/register", [ UserController::class, "register" ]);
