@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('reserves', function (Blueprint $table) {
             $table->id();
-            $table->integer( "place" );
-            $table->datetime( "time" );
+            $table->integer( "table_number" );
+            $table->datetime( "start_time" );
+            $table->datetime( "end_time" );
             $table->foreignId( "user_id" );
             $table->timestamps();
         });

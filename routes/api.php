@@ -11,6 +11,7 @@ use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\AdminController;
 use App\Http\Controllers\api\ProfileController;
 use App\Models\User;
+use App\Http\Controllers\api\ReserveController;
 
 //User
 Route::post( "/register", [ UserController::class, "register" ]);
@@ -73,3 +74,5 @@ Route::get("/verify_email/{id}/{hash}", function( Request $request, $id, $hash )
     return Response()->json([ "message" => "Az email sikeresen megerősítve" ]);
 
 } )->name("verification.verify")->middleware( "signed" );
+
+Route::post( "/reserve", [ ReserveController::class, "reserveTable" ]);
