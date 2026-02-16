@@ -63,13 +63,13 @@ Route::get("/verify_email/{id}/{hash}", function( Request $request, $id, $hash )
 
     $user = User::findOrFail($request->id);
 
-    if( !$user->hasVerifiedEmail() ) {
+    if( $user->hasVerifiedEmail() ) {
 
         return Response()->json([ "message" => "Ez az email már meg van erősítve" ]);
     }
 
     $user->markEmailAsVerified();
 
-    return Response()->json([ "message" => "Az email erősítve" ]);
+    return Response()->json([ "message" => "Az email sikeresen megerősítve" ]);
 
 } )->name("verification.verify")->middleware( "signed" );

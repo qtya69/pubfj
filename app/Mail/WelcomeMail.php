@@ -22,7 +22,7 @@ class WelcomeMail extends Mailable
 
     public function __construct( public User $user ) {
         $this->verificationURL = URL::temporarySignedRoute(
-            'verification.verify', now()->addHour(),[
+            'verification.verify', now()->addMinutes(5),[
                 'id' => $user->id,
                 'hash' => sha1($user->email)
             ]
