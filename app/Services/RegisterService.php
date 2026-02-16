@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\ResponseTrait;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterService {
 
@@ -34,6 +36,7 @@ class RegisterService {
 
         $profile->save();
 
+        Mail::to( $user->email )->send( new WelcomeMail( $user ) );
         return $this->sendResponse( $data, "Sikeres regisztráció." );
     }
 }

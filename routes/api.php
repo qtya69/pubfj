@@ -58,4 +58,17 @@ Route::middleware([ "auth:sanctum" ])->group( function() {
     });
 });
 
+Route::get("/verify_email/{id}/{hash}", function( Request $request, $id, $hash ) {
 
+    $user = User::findOrFail($request->id);
+
+    if( !$user->hasVerifiedEmail() ) {
+
+        return Response()->json([ "message" => "Ez az email már meg van erősítve" ]);
+    }
+
+    $user->markEmailAsVerified();
+
+    return Response()->json([ "message" => "Az email erősítve" ]);
+
+} )->name("verification.verify")->middleware( "signed" );
